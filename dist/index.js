@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify = require("fastify")({ logger: true });
-const token_discovery_controller_1 = require("./token-discovery-controller");
+const token_discovery_service_1 = require("./token-discovery-service");
 fastify.get("/", async () => {
     return { "health": 'ok' };
 });
@@ -9,7 +9,7 @@ fastify.get("/get-token-collection:params", async (request) => {
     const { smartContract, chain, openSeaSlug, ipfsBaseUrl, onChainModuleKeys } = request.query;
     if (!smartContract || !chain)
         return null;
-    const tokenDiscovery = new token_discovery_controller_1.TokenDiscoveryController(onChainModuleKeys, ipfsBaseUrl);
+    const tokenDiscovery = new token_discovery_service_1.TokenDiscoveryService(onChainModuleKeys, ipfsBaseUrl);
     const output = await tokenDiscovery.getInitialContractAddressMetaData(smartContract, chain, openSeaSlug);
     return output;
 });
@@ -17,7 +17,7 @@ fastify.get("/get-owner-tokens:params", async (request, reply) => {
     const { smartContract, chain, owner, openSeaSlug, ipfsBaseUrl, onChainModuleKeys } = request.query;
     if (!smartContract || !chain || !owner)
         return [];
-    const tokenDiscovery = new token_discovery_controller_1.TokenDiscoveryController(onChainModuleKeys, ipfsBaseUrl);
+    const tokenDiscovery = new token_discovery_service_1.TokenDiscoveryService(onChainModuleKeys, ipfsBaseUrl);
     const output = await tokenDiscovery.getTokens(smartContract, chain, openSeaSlug, owner);
     return output;
 });
