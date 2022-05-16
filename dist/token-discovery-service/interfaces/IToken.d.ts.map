@@ -1,1 +1,0 @@
-{"version":3,"file":"IToken.d.ts","sourceRoot":"","sources":["../../../token-discovery-service/interfaces/IToken.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,MAAM;IACrB,GAAG,EAAE,MAAM,CAAC;IACZ,OAAO,EAAE,MAAM,CAAC;IAChB,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,IAAI,CAAC,EAAE,MAAM,CAAC;CACf"}
