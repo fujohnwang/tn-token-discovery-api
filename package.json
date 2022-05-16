@@ -1,7 +1,7 @@
 {
-  "name": "token-discovery-api",
+  "name": "tn-token-discovery-api",
   "version": "1.0.0",
-  "description": "locate and return onchain collections and tokens",
+  "description": "locate and return blockchain collection tokens",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,16 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TokenScript/token-discovery-api.git"
+    "url": "git+https://github.com/TokenScript/tn-token-discovery-api.git"
   },
   "author": "smart token labs",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TokenScript/token-discovery-api/issues"
+    "url": "https://github.com/TokenScript/tn-token-discovery-api/issues"
   },
-  "homepage": "https://github.com/TokenScript/token-discovery-api#readme",
+  "homepage": "https://github.com/TokenScript/tn-token-discovery-api#readme",
   "dependencies": {
-    "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "fastify": "^3.29.0",
     "node-fetch": "2.6.1",

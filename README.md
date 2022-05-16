@@ -7,6 +7,28 @@ Token discovery API
 This API has been created to combine multiple ways of reading on chain tokens across many chains.
 To learn collection and token meta. 
 
+### End Points
+
+#### Get NFT Token Collection
+
+Gets an NFT's Collection Image and Title.
+
+````
+
+    /get-token-collection?smartContract=0x...&chain=eth
+
+````
+
+#### Get Tokens of an NFT Collection
+
+Gets a owners NFT's of a collection; Image, Title and Meta.
+
+````
+
+    /get-owner-tokens?smartContract=0x...&chain=eth&owner=0x...
+
+````
+
 ### Developer
 
 #### Test
@@ -35,3 +57,18 @@ Example URLS for fetching token collection data:
 
 http://localhost:3000/get-owner-tokens?smartContract=0x414c5e3716bcec4b2373108b187914215695627a&chain=eth&owner=0x7abaEd470E89820738B5e58874dFa7a77F9Cd44d
 
+### Chain Support
+
+mainnet / eth
+polygon
+arbitrum
+optimism
+rinkeby
+ropsten
+goerli
+kovan
+bsc
+mumbai
+avalanche
+fantom
+POAP via XDai
