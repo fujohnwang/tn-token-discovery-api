@@ -59,16 +59,16 @@ http://localhost:3000/get-owner-tokens?smartContract=0x414c5e3716bcec4b2373108b1
 
 ### Chain Support
 
-mainnet / eth
-polygon
-arbitrum
-optimism
-rinkeby
-ropsten
-goerli
-kovan
-bsc
-mumbai
-avalanche
-fantom
-POAP via XDai
+- mainnet / eth
+- polygon
+- arbitrum
+- optimism
+- rinkeby
+- ropsten
+- goerli
+- kovan
+- bsc
+- mumbai
+- avalanche
+- fantom
+- POAP (via XDai)
