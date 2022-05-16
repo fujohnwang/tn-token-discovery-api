@@ -7,6 +7,20 @@ Token discovery API
 This API has been created to combine multiple ways of reading on chain tokens across many chains.
 To learn collection and token meta. 
 
+### Developer
+
+#### Test
+
+```` npm run test ````
+
+#### Serve
+
+```` npm run start ````
+
+#### Build
+
+```` npm run build ````
+
 ### Example URLS
 
 Example URLS for fetching collection data:
