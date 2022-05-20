@@ -1,0 +1,86 @@
+name: "CI"
+
+on: [push, pull_request]
+
+env:
+  NODE_VERSION: 16
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{env.NODE_VERSION}}
+          cache: "npm"
+      - run: |
+          echo -n "Node version: "
+          node -v
+          echo -n "Npm version: "
+          npm -v
+      - name: building
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{env.NODE_VERSION}}
+          cache: "npm"
+      - run: |
+          echo -n "Node version: "
+          node -v
+          echo -n "Npm version: "
+          npm -v
+      - name: testing
+        run: |
+          npm ci
+          npm run test
+        env:
+          ALCHEMY_API: ${{secrets.ALCHEMY_API}}
+          OPENSEA_API: ${{secrets.OPENSEA_API}}
+          MORALIS_API: ${{secrets.MORALIS_API}}
+  deploy:
+    needs:
+      - build
+      - test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+      - name: deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: s01cd.syd6.hostingplatform.net.au
+          username: ${{secrets.FTP_USER}}
+          password: ${{secrets.FTP_PASS}}
+          protocol: ftps
+          local-dir: dist/
+          server-dir: api.token-discovery.tokenscript.org/
+          log-level: standard
+      - run: |
+          mkdir -p tmp
+          touch tmp/restart.txt
+      - name: restart server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: s01cd.syd6.hostingplatform.net.au
+          username: ${{secrets.FTP_USER}}
+          password: ${{secrets.FTP_PASS}}
+          protocol: ftps
+          local-dir: tmp/
+          server-dir: api.token-discovery.tokenscript.org/tmp/
+          log-level: standard
+      - name: checking
+        run: curl -Lsv --compressed https://api.token-discovery.tokenscript.org/
