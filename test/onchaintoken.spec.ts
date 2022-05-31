@@ -77,6 +77,7 @@ tap.test('On-chain token module', t => {
       metaData!.image,
       mockOpenSeaResponse.assets[0].collection.image_url
     );
+    mock.restore();
     childTest.end();
   });
 
@@ -107,6 +108,7 @@ tap.test('On-chain token module', t => {
     childTest.equal(metaData!.contract, issuer.contract);
     childTest.equal(metaData!.title, mockMoralisResponse.result[0].name);
     childTest.equal(metaData!.image, image);
+    mock.restore();
     childTest.end();
   });
 
