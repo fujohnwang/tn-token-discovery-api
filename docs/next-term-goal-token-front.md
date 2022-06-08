@@ -77,3 +77,73 @@ Since the aggregator takes data from multiple sources, some abstraction is neede
 ## Boon's challenge point 3
 
 I forgot what it is - Weiwu
+
+# Token Front Design Draft(added by Darren)
+
+## Core Positioning
+
+1. metadata service
+	- realtime refresh is not acceptable
+2. consistent API layer for easy use(e.g. Spring Framework of web2 era)
+	- forward is ok and make sense 
+
+
+## API Spec Layers
+
+There will be at least two layers of API: 
+1.  Server Side API  / Provider side API
+2.  Client Side SDK API / Consumer side SDK API
+
+The Serverside API is the key protocol or contract for the token interactions.  Maybe GraphQL is the best suitable tool for this scenario. It meets Abstraction and Consistency demands.
+
+Although client side applications(dApps) or consumer side applications can access Token Front directly via GraphQL in their own way, a better designed SDK will help a lot. Especially nodejs/javascript ecosystem is the most popular community
+
+SDK API can be an easy way to use Token Front service, e.g. 
+
+```
+val token = TokenFront.token(symbol)
+token.profile(...)
+token.tranfer(...)
+token.issue(...)
+token.mint(...)
+token.sign(...)
+...
+```
+
+As more and more users accept us, SDKs of Android/iOS/PWA may be introduced.
+
+
+
+## About Completeness
+
+As completeness, I have two understandings, let's me show you one by one.
+
+The First Completeness I can understand is, How can we cover all of the tokens in the market? 
+
+That's why I have mentioned on the meeting what will be the order or roadmap for Token Front to serve all of the tokens.
+
+The Second Completeness is "How can we cover all of the functions of any Token?" or "How can we cover a full function set of a Token?"
+
+They are different granularities, but both need our attention.
+
+For the First Completeness,  we have at least 3 ways to go:
+
+1.  cover the topN tokens first, then other tokens as per some priority;
+2.  serve at demand,  if the requested token is not ready, we log and bring it online later on;
+3.  registration and enlist,  we define specification and vendors submit there token, after that, the token will be ready for use on Token Front;
+
+
+For the Second Completeness, there is no better way just one way:  as long as more tokens we introduce onto Token Front, the abstraction will come to completeness naturally.
+
+
+
+
+
+## Architecture Proposal
+
+
+![image](https://user-images.githubusercontent.com/451506/172513737-1ef117d8-413f-44a9-b7f5-4f708fb4bf4f.png)
+
+Data Subscription should be abstracted behind Token Front and make it inline, consumers or token front users should not care about it.
+
+
